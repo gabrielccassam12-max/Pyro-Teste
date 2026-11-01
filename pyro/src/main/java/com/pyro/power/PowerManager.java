@@ -8,6 +8,7 @@ import com.pyro.particle.Fx;
 import com.pyro.util.Scheduler;
 import com.pyro.util.Snd;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentTarget;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -53,11 +54,11 @@ public final class PowerManager {
     private static final Random R = new Random();
 
     public static PlayerData get(ServerPlayerEntity p) {
-        return p.getAttachedOrElse(DATA, PlayerData.DEFAULT);
+        return ((AttachmentTarget) p).getAttachedOrElse(DATA, PlayerData.DEFAULT);
     }
 
     public static void set(ServerPlayerEntity p, PlayerData d) {
-        p.setAttached(DATA, d);
+        ((AttachmentTarget) p).setAttached(DATA, d);
     }
 
     private static void note(ServerPlayerEntity p, String key, Formatting f) {
